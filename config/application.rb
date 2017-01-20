@@ -24,3 +24,9 @@ module Workspace
     config.active_record.raise_in_transactional_callbacks = true
   end
 end
+
+module Monka
+  class Application < Rails::Application
+    config.time_zone = 'Tokyo'
+  end
+end
