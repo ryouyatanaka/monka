@@ -1,14 +1,22 @@
+<% if notice %>
 <p id="notice"><%= notice %></p>
+  <div class="alert alert-success alert-dismissible" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <p id="notice"><%= notice %></p>
+  </div>
+<% end %>
+
+<h2 class="sub-header">Users</h2>
 
 <p>
-  <strong>Name:</strong>
+  <strong>名前：</strong>
   <%= @user.name %>
 </p>
 
 <p>
-  <strong>Email:</strong>
+  <strong>Email：</strong>
   <%= @user.email %>
 </p>
 
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+<%= link_to '編集', edit_user_path(@user), class: 'btn btn-default'%>
+<%= link_to '戻る', users_path, class: 'btn btn-default' %>
