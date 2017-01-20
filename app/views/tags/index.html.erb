@@ -1,27 +1,34 @@
+<% if notice %>
 <p id="notice"><%= notice %></p>
+  <div class="alert alert-success alert-dismissible" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <p id="notice"><%= notice %></p>
+  </div>
+<% end %>
 
-<h1>Tags</h1>
+<h2 class="sub-header">Tags</h2>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @tags.each do |tag| %>
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
       <tr>
-        <td><%= tag.name %></td>
-        <td><%= link_to 'Show', tag %></td>
-        <td><%= link_to 'Edit', edit_tag_path(tag) %></td>
-        <td><%= link_to 'Destroy', tag, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+        <th>タグ名</th>
+        <th colspan="3"></th>
+    　</tr>
+    </thead>
 
+    <tbody>
+      <% @tags.each do |tag| %>
+        <tr>
+          <td><%= tag.name %></td>
+          <td><%= link_to '詳細', tag %></td>
+          <td><%= link_to '編集', edit_tag_path(tag) %></td>
+          <td><%= link_to '削除', tag, method: :delete, data: { confirm: '本当に削除してもいいですか？' } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
 <br>
 
-<%= link_to 'New Tag', new_tag_path %>
+<%= link_to '新規登録', new_tag_path, class: 'btn btn-default' %>
