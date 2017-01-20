@@ -19,9 +19,11 @@
           <a class="navbar-brand" href="#">Monka</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">Sign out</a></li>
-          </ul>
+          <% if user_signed_in? %>
+            <ul class="nav navbar-nav navbar-right">
+              <li><%= link_to 'Sign out', destroy_user_session_path, method: :delete %></li>
+            </ul>
+          <% end %>
         </div>
       </div>
     </nav>
