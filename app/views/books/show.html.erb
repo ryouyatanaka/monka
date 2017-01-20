@@ -1,4 +1,12 @@
+<% if notice %>
 <p id="notice"><%= notice %></p>
+  <div class="alert alert-success alert-dismissible" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <p id="notice"><%= notice %></p>
+  </div>
+<% end %>
+
+<h2 class="sub-header">Books</h2>
 
 <p>
   <strong>タイトル：</strong>
@@ -12,18 +20,20 @@
 
 <p>
   <strong>出版日：</strong>
-  <%= @book.published_on %>
+  <%= @book.published_on.try(:strftime, '%Y年%m月') %>
 </p>
 
 <p>
   <strong>価格：</strong>
-  <%= @book.price %>
+  <%= number_to_currency(@book.try(:price), precision: 0, unit: "円") %>
 </p>
 
 <p>
   <strong>発売：</strong>
-  <%= @book.showing %>
+  <%= @book.showing? ? '可能' : '不可' %>
 </p>
 
-<%= link_to 'Edit', edit_book_path(@book) %> |
-<%= link_to 'Back', books_path %>
+<%= link_to '編集', edit_book_path(@book), class: 'btn btn-default'%>
+<%= link_to '戻る', books_path, class: 'btn btn-default' %>
+
+<hr>

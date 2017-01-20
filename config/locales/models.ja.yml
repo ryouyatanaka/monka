@@ -1,0 +1,15 @@
+ja:
+  activerecord:
+    attributes:
+      book:
+        title: タイトル
+        author: 著者
+        published_on: 出版日
+        showing: 発売
+        price: 価格
+      tag:
+        name: タグ名
+      tagging:
+        book_id: 本
+        tag_id: タグ
+
