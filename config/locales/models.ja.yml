@@ -1,4 +1,6 @@
 ja:
+  admin: '管理者'
+  general: '一般'
   activerecord:
     attributes:
       book:
@@ -12,4 +14,8 @@ ja:
       tagging:
         book_id: 本
         tag_id: タグ
-
+      user:
+        name: 名前
+        role: 役割
+        password: パスワード
+        pasword_confiramation: パスワード(確認用）
