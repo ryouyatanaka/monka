@@ -8,6 +8,31 @@
     </head>
     
     <body>
+        
+        <div class="container">
+          <div class="header clearfix">
+            <nav>
+              <ul class="nav nav-pills pull-right">
+                <li role="presentation" class="active"><a href="/">Home</a></li>
+                <li role="presentation" class=""><a href="/about">About</a></li>
+              </ul>
+            </nav>
+            <h3 class="text-muted">Monka</h3><!-- githubのprj名の公表okかどうか確認が必要です。 -->
+          </div>
+
+          <div class="jumbotron">
+            <h1>F-B Shop</h1>
+            <p class="lead">This site is the test shop of my favorite books.</p>
+            <p class="lead">Enjoy and select your favorite books!</p>
+          </div>
+
         <%= yield %>
+        
+          <footer class="footer">
+            <p>&copy; 2016 文科省IT人材育成プロジェクト</p><!-- githubのprj名の公表okかどうか確認が必要です。 -->
+            <p>code: </p><!-- 公開するrailsのサンプルコードのURLを書いておきたいです。 -->
+          </footer>
+
+        </div> <!-- /container -->        
     </body>
 </html>
