@@ -19,17 +19,15 @@ require 'rails_helper'
 # that an instance is receiving a specific message.
 
 RSpec.describe UsersController, type: :controller do
-
+  let(:admin_user) { User.all.first }
+  before(:each) { sign_in admin_user }
   # This should return the minimal set of attributes required to create a valid
   # User. As you add validations to User, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    {  name: 'tarou', email: 'abc@def.com', password: 'password',password_confirmation: 'password', role: 'admin'}
   }
 
-  let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
-  }
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
@@ -40,7 +38,7 @@ RSpec.describe UsersController, type: :controller do
     it "assigns all users as @users" do
       user = User.create! valid_attributes
       get :index, params: {}, session: valid_session
-      expect(assigns(:users)).to eq([user])
+      expect(assigns(:users).count).to eq(2)
     end
   end
 
@@ -86,31 +84,19 @@ RSpec.describe UsersController, type: :controller do
         expect(response).to redirect_to(User.last)
       end
     end
-
-    context "with invalid params" do
-      it "assigns a newly created but unsaved user as @user" do
-        post :create, params: {user: invalid_attributes}, session: valid_session
-        expect(assigns(:user)).to be_a_new(User)
-      end
-
-      it "re-renders the 'new' template" do
-        post :create, params: {user: invalid_attributes}, session: valid_session
-        expect(response).to render_template("new")
-      end
-    end
   end
 
   describe "PUT #update" do
     context "with valid params" do
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+        { name: 'hanako' }
       }
 
       it "updates the requested user" do
         user = User.create! valid_attributes
         put :update, params: {id: user.to_param, user: new_attributes}, session: valid_session
         user.reload
-        skip("Add assertions for updated state")
+        expect(user.name).to eq new_attributes[:name]
       end
 
       it "assigns the requested user as @user" do
@@ -123,20 +109,6 @@ RSpec.describe UsersController, type: :controller do
         user = User.create! valid_attributes
         put :update, params: {id: user.to_param, user: valid_attributes}, session: valid_session
         expect(response).to redirect_to(user)
-      end
-    end
-
-    context "with invalid params" do
-      it "assigns the user as @user" do
-        user = User.create! valid_attributes
-        put :update, params: {id: user.to_param, user: invalid_attributes}, session: valid_session
-        expect(assigns(:user)).to eq(user)
-      end
-
-      it "re-renders the 'edit' template" do
-        user = User.create! valid_attributes
-        put :update, params: {id: user.to_param, user: invalid_attributes}, session: valid_session
-        expect(response).to render_template("edit")
       end
     end
   end

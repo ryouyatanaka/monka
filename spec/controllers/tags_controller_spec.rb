@@ -19,36 +19,22 @@ require 'rails_helper'
 # that an instance is receiving a specific message.
 
 RSpec.describe TagsController, type: :controller do
-
+  let(:admin_user) { User.all.first }
+  before(:each) { sign_in admin_user }
   # This should return the minimal set of attributes required to create a valid
   # Tag. As you add validations to Tag, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    { name: 'スポーツ' }
   }
 
-  let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
-  }
-
-  # This should return the minimal set of values that should be in the session
-  # in order to pass any filters (e.g. authentication) defined in
-  # TagsController. Be sure to keep this updated too.
   let(:valid_session) { {} }
 
   describe "GET #index" do
     it "assigns all tags as @tags" do
       tag = Tag.create! valid_attributes
       get :index, params: {}, session: valid_session
-      expect(assigns(:tags)).to eq([tag])
-    end
-  end
-
-  describe "GET #show" do
-    it "assigns the requested tag as @tag" do
-      tag = Tag.create! valid_attributes
-      get :show, params: {id: tag.to_param}, session: valid_session
-      expect(assigns(:tag)).to eq(tag)
+      expect(assigns(:tags).count).to eq(6)
     end
   end
 
@@ -83,19 +69,7 @@ RSpec.describe TagsController, type: :controller do
 
       it "redirects to the created tag" do
         post :create, params: {tag: valid_attributes}, session: valid_session
-        expect(response).to redirect_to(Tag.last)
-      end
-    end
-
-    context "with invalid params" do
-      it "assigns a newly created but unsaved tag as @tag" do
-        post :create, params: {tag: invalid_attributes}, session: valid_session
-        expect(assigns(:tag)).to be_a_new(Tag)
-      end
-
-      it "re-renders the 'new' template" do
-        post :create, params: {tag: invalid_attributes}, session: valid_session
-        expect(response).to render_template("new")
+        expect(response).to redirect_to(tags_path)
       end
     end
   end
@@ -103,14 +77,14 @@ RSpec.describe TagsController, type: :controller do
   describe "PUT #update" do
     context "with valid params" do
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+        { name: 'Sports' }
       }
 
       it "updates the requested tag" do
         tag = Tag.create! valid_attributes
         put :update, params: {id: tag.to_param, tag: new_attributes}, session: valid_session
         tag.reload
-        skip("Add assertions for updated state")
+        expect(tag.name).to eq new_attributes[:name]
       end
 
       it "assigns the requested tag as @tag" do
@@ -122,21 +96,7 @@ RSpec.describe TagsController, type: :controller do
       it "redirects to the tag" do
         tag = Tag.create! valid_attributes
         put :update, params: {id: tag.to_param, tag: valid_attributes}, session: valid_session
-        expect(response).to redirect_to(tag)
-      end
-    end
-
-    context "with invalid params" do
-      it "assigns the tag as @tag" do
-        tag = Tag.create! valid_attributes
-        put :update, params: {id: tag.to_param, tag: invalid_attributes}, session: valid_session
-        expect(assigns(:tag)).to eq(tag)
-      end
-
-      it "re-renders the 'edit' template" do
-        tag = Tag.create! valid_attributes
-        put :update, params: {id: tag.to_param, tag: invalid_attributes}, session: valid_session
-        expect(response).to render_template("edit")
+        expect(response).to redirect_to(tags_url)
       end
     end
   end

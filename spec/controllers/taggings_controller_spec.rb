@@ -19,16 +19,17 @@ require 'rails_helper'
 # that an instance is receiving a specific message.
 
 RSpec.describe TaggingsController, type: :controller do
-
+  let(:admin_user) { User.all.first }
+  before(:each) { sign_in admin_user }
   # This should return the minimal set of attributes required to create a valid
   # Tagging. As you add validations to Tagging, be sure to
   # adjust the attributes here as well.
+  let(:book) { Book.first }
+  
+  let(:tag) { Tag.first }
+  
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
-  }
-
-  let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    { book_id: book.id, tag_id: tag.id }
   }
 
   # This should return the minimal set of values that should be in the session
@@ -36,124 +37,84 @@ RSpec.describe TaggingsController, type: :controller do
   # TaggingsController. Be sure to keep this updated too.
   let(:valid_session) { {} }
 
-  describe "GET #index" do
-    it "assigns all taggings as @taggings" do
-      tagging = Tagging.create! valid_attributes
-      get :index, params: {}, session: valid_session
-      expect(assigns(:taggings)).to eq([tagging])
-    end
-  end
 
-  describe "GET #show" do
-    it "assigns the requested tagging as @tagging" do
-      tagging = Tagging.create! valid_attributes
-      get :show, params: {id: tagging.to_param}, session: valid_session
-      expect(assigns(:tagging)).to eq(tagging)
-    end
-  end
+#   describe "GET #new" do
+#     it "assigns a new tagging as @tagging" do
+#       get :new, params: {}, session: valid_session
+#       expect(assigns(:tagging)).to be_a_new(Tagging)
+#     end
+#   end
 
-  describe "GET #new" do
-    it "assigns a new tagging as @tagging" do
-      get :new, params: {}, session: valid_session
-      expect(assigns(:tagging)).to be_a_new(Tagging)
-    end
-  end
+#   describe "GET #edit" do
+#     it "assigns the requested tagging as @tagging" do
+#       tagging = Tagging.create! valid_attributes
+#       get :edit, params: {id: tagging.to_param}, session: valid_session
+#       expect(assigns(:tagging)).to eq(tagging)
+#     end
+#   end
 
-  describe "GET #edit" do
-    it "assigns the requested tagging as @tagging" do
-      tagging = Tagging.create! valid_attributes
-      get :edit, params: {id: tagging.to_param}, session: valid_session
-      expect(assigns(:tagging)).to eq(tagging)
-    end
-  end
+#   describe "POST #create" do
+#     context "with valid params" do
+#       it "creates a new Tagging" do
+#         expect {
+#           post :create, params: {tagging: valid_attributes}, session: valid_session
+#         }.to change(Tagging, :count).by(1)
+#       end
 
-  describe "POST #create" do
-    context "with valid params" do
-      it "creates a new Tagging" do
-        expect {
-          post :create, params: {tagging: valid_attributes}, session: valid_session
-        }.to change(Tagging, :count).by(1)
-      end
+#       it "assigns a newly created tagging as @tagging" do
+#         post :create, params: {tagging: valid_attributes}, session: valid_session
+#         expect(assigns(:tagging)).to be_a(Tagging)
+#         expect(assigns(:tagging)).to be_persisted
+#       end
 
-      it "assigns a newly created tagging as @tagging" do
-        post :create, params: {tagging: valid_attributes}, session: valid_session
-        expect(assigns(:tagging)).to be_a(Tagging)
-        expect(assigns(:tagging)).to be_persisted
-      end
+#       it "redirects to the created tagging" do
+#         post :create, params: {tagging: valid_attributes}, session: valid_session
+#         expect(response).to redirect_to(Tagging.last)
+#       end
+#     end
+#   end
 
-      it "redirects to the created tagging" do
-        post :create, params: {tagging: valid_attributes}, session: valid_session
-        expect(response).to redirect_to(Tagging.last)
-      end
-    end
+#   describe "PUT #update" do
+#     context "with valid params" do
+#       let(:new_tag) { Tag.create(name: '音楽') }
+#       let(:new_attributes){
+#         { tag_id: new_tag.id }
+#       }
 
-    context "with invalid params" do
-      it "assigns a newly created but unsaved tagging as @tagging" do
-        post :create, params: {tagging: invalid_attributes}, session: valid_session
-        expect(assigns(:tagging)).to be_a_new(Tagging)
-      end
+#       it "updates the requested tagging" do
+#         tagging = Tagging.create! valid_attributes
+#         put :update, params: {id: tagging.to_param, tagging: new_attributes}, session: valid_session
+#         tagging.reload
+#         expect(tagging.tag_id).to eq new_attributes[:tag_id]
+#       end
 
-      it "re-renders the 'new' template" do
-        post :create, params: {tagging: invalid_attributes}, session: valid_session
-        expect(response).to render_template("new")
-      end
-    end
-  end
+#       it "assigns the requested tagging as @tagging" do
+#         tagging = Tagging.create! valid_attributes
+#         put :update, params: {id: tagging.to_param, tagging: valid_attributes}, session: valid_session
+#         expect(assigns(:tagging)).to eq(tagging)
+#       end
 
-  describe "PUT #update" do
-    context "with valid params" do
-      let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
-      }
+#       it "redirects to the tagging" do
+#         tagging = Tagging.create! valid_attributes
+#         put :update, params: {id: tagging.to_param, tagging: valid_attributes}, session: valid_session
+#         expect(response).to redirect_to(tagging)
+#       end
+#     end
+#   end
 
-      it "updates the requested tagging" do
-        tagging = Tagging.create! valid_attributes
-        put :update, params: {id: tagging.to_param, tagging: new_attributes}, session: valid_session
-        tagging.reload
-        skip("Add assertions for updated state")
-      end
+#   describe "DELETE #destroy" do
+#     it "destroys the requested tagging" do
+#       tagging = Tagging.create! valid_attributes
+#       expect {
+#         delete :destroy, params: {id: tagging.to_param}, session: valid_session
+#       }.to change(Tagging, :count).by(-1)
+#     end
 
-      it "assigns the requested tagging as @tagging" do
-        tagging = Tagging.create! valid_attributes
-        put :update, params: {id: tagging.to_param, tagging: valid_attributes}, session: valid_session
-        expect(assigns(:tagging)).to eq(tagging)
-      end
+#     it "redirects to the taggings list" do
+#       tagging = Tagging.create! valid_attributes
+#       delete :destroy, params: {id: tagging.to_param}, session: valid_session
+#       expect(response).to redirect_to(taggings_url)
+#     end
+#   end
 
-      it "redirects to the tagging" do
-        tagging = Tagging.create! valid_attributes
-        put :update, params: {id: tagging.to_param, tagging: valid_attributes}, session: valid_session
-        expect(response).to redirect_to(tagging)
-      end
-    end
-
-    context "with invalid params" do
-      it "assigns the tagging as @tagging" do
-        tagging = Tagging.create! valid_attributes
-        put :update, params: {id: tagging.to_param, tagging: invalid_attributes}, session: valid_session
-        expect(assigns(:tagging)).to eq(tagging)
-      end
-
-      it "re-renders the 'edit' template" do
-        tagging = Tagging.create! valid_attributes
-        put :update, params: {id: tagging.to_param, tagging: invalid_attributes}, session: valid_session
-        expect(response).to render_template("edit")
-      end
-    end
-  end
-
-  describe "DELETE #destroy" do
-    it "destroys the requested tagging" do
-      tagging = Tagging.create! valid_attributes
-      expect {
-        delete :destroy, params: {id: tagging.to_param}, session: valid_session
-      }.to change(Tagging, :count).by(-1)
-    end
-
-    it "redirects to the taggings list" do
-      tagging = Tagging.create! valid_attributes
-      delete :destroy, params: {id: tagging.to_param}, session: valid_session
-      expect(response).to redirect_to(taggings_url)
-    end
-  end
-
-end
+ end
