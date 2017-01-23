@@ -1,3 +1,4 @@
 class Book < ApplicationRecord
-    has_many :taggings
-end
+    
+    scope :visible, ->(){ where(showing: true) }
+end 

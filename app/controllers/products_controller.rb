@@ -1,6 +1,6 @@
 class ProductsController < ApplicationController
   def index
-    @books = Book.all
+    @books = Book.visible
     render layout: 'front'
   end
 end
