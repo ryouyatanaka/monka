@@ -62,6 +62,7 @@ class TaggingsController < ApplicationController
   end
 
   private
+  
     # Use callbacks to share common setup or constraints between actions.
     def set_tagging
       @tagging = Tagging.find(params[:id])
