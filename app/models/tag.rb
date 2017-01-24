@@ -1,3 +1,4 @@
 class Tag < ApplicationRecord
-
-end
+  has_many :taggings
+  has_many :books, through: :taggings
+  end
