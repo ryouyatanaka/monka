@@ -33,6 +33,8 @@
   <%= @book.showing? ? '可能' : '不可' %>
 </p>
 
+<hr>
+
 <%= link_to '編集', edit_book_path(@book), class: 'btn btn-default'%>
 <%= link_to '戻る', books_path, class: 'btn btn-default' %>
 

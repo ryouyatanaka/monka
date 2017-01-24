@@ -1,5 +1,6 @@
 class TaggingsController < ApplicationController
   before_action :set_tagging, only: [:show, :edit, :update, :destroy]
+  before_action :set_book
 
   # GET /taggings
   # GET /taggings.json
@@ -15,18 +16,15 @@ class TaggingsController < ApplicationController
   # GET /taggings/new
   def new
     @tagging = Tagging.new
-    @book = Book.find(params[:book_id])
   end
 
   # GET /taggings/1/edit
   def edit
-    @book = Book.find(params[:book_id])
   end
 
   # POST /taggings
   # POST /taggings.json
   def create
-    @book = Book.find(params[:book_id])
     @tagging = Tagging.new(tagging_params)
 
     respond_to do |format|
@@ -43,7 +41,6 @@ class TaggingsController < ApplicationController
   # PATCH/PUT /taggings/1
   # PATCH/PUT /taggings/1.json
   def update
-    @book = Book.find(params[:book_id])
 
     respond_to do |format|
       if @tagging.update(tagging_params)
@@ -76,5 +73,9 @@ class TaggingsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def tagging_params
       params.require(:tagging).permit(:book_id, :tag_id)
+    end
+
+    def set_book
+      @book = Book.find(params[:book_id])
     end
 end

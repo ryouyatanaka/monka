@@ -2,19 +2,20 @@
 <html>
     <title>Monka</title>
     <%= csrf_meta_tags %>
-    
+
     <%= stylesheet_link_tag 'front', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'front', 'data-turbolinks-track': 'reload' %>
     </head>
-    
+
     <body>
-        
+
         <div class="container">
           <div class="header clearfix">
             <nav>
               <ul class="nav nav-pills pull-right">
                 <li role="presentation" class="active"><a href="/">Home</a></li>
                 <li role="presentation" class=""><a href="/about">About</a></li>
+                <li role="presentation" class=""><a href="/users/sign_in">Log in</a></li>
               </ul>
             </nav>
             <h3 class="text-muted">Monka</h3><!-- githubのprj名の公表okかどうか確認が必要です。 -->
@@ -27,12 +28,12 @@
           </div>
 
         <%= yield %>
-        
+
           <footer class="footer">
             <p>&copy; 2016 文科省IT人材育成プロジェクト</p><!-- githubのprj名の公表okかどうか確認が必要です。 -->
             <p>code: </p><!-- 公開するrailsのサンプルコードのURLを書いておきたいです。 -->
           </footer>
 
-        </div> <!-- /container -->        
+        </div> <!-- /container -->
     </body>
 </html>
