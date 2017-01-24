@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Monka</title>
+    <link href="bootstrap.min.css" rel="stylesheet">
+    <link href="dashboard.css" rel="stylesheet">
+  </head>
+
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Monka</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#">Sign out</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+          <ul class="nav nav-sidebar">
+            <li class="active"><a href="#">Books</a></li>
+            <li><a href="#">Tags</a></li>
+          </ul>
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+
+          <h2>Tagging 新規登録</h2>
+
+          <form class="new_tagging" id="new_tagging" action="/books/1/taggings" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><input type="hidden" name="authenticity_token" value="pMS9UWbG/3HTY6vJTsNYoQNAn2w2bHSGI2M75LJVA0IqnOvFBmQBnMBzQkojRklqKds+9ca9eoAz7xjwi7BzHw==" />
+
+            <h2 class="sub-header">Book</h2>
+
+            <p>
+              <strong>タイトル：</strong>
+              徒然草
+            </p>
+
+            <p>
+              <strong>著書：</strong>
+              吉田兼好
+            </p>
+
+            <p>
+              <strong>出版日：</strong>
+              1331-08-24
+            </p>
+
+            <hr>
+
+            <div class="form-group">
+              <label for="tagging_tag_id">タグ</label>
+              <select name="tagging[tag_id]" id="tagging_tag_id"><option value="1">文学・小説</option>
+                <option value="2">科学・テクノロジー</option>
+                <option value="3">文庫</option>
+                <option value="4">ハードカバー</option>
+                <option value="5">雑誌</option></select>
+            </div>
+
+            <div class="actions">
+              <input type="submit" name="commit" value="登録" class="btn btn-default" data-disable-with="登録" />
+            </div>
+          </form>
+
+          <br />
+
+          <a class="btn btn-default" href="/books/1">戻る</a>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="bootstrap.min.js"></script>
+
+  </body>
+</html>

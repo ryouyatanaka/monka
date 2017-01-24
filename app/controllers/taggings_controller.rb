@@ -15,20 +15,23 @@ class TaggingsController < ApplicationController
   # GET /taggings/new
   def new
     @tagging = Tagging.new
+    @book = Book.find(params[:book_id])
   end
 
   # GET /taggings/1/edit
   def edit
+    @book = Book.find(params[:book_id])
   end
 
   # POST /taggings
   # POST /taggings.json
   def create
+    @book = Book.find(params[:book_id])
     @tagging = Tagging.new(tagging_params)
 
     respond_to do |format|
       if @tagging.save
-        format.html { redirect_to @tagging, notice: 'Tagging was successfully created.' }
+        format.html { redirect_to @book, notice: 'Tagging was successfully created.' }
         format.json { render :show, status: :created, location: @tagging }
       else
         format.html { render :new }
@@ -40,9 +43,11 @@ class TaggingsController < ApplicationController
   # PATCH/PUT /taggings/1
   # PATCH/PUT /taggings/1.json
   def update
+    @book = Book.find(params[:book_id])
+
     respond_to do |format|
       if @tagging.update(tagging_params)
-        format.html { redirect_to @tagging, notice: 'Tagging was successfully updated.' }
+        format.html { redirect_to @book, notice: 'Tagging was successfully updated.' }
         format.json { render :show, status: :ok, location: @tagging }
       else
         format.html { render :edit }
@@ -62,7 +67,7 @@ class TaggingsController < ApplicationController
   end
 
   private
-  
+
     # Use callbacks to share common setup or constraints between actions.
     def set_tagging
       @tagging = Tagging.find(params[:id])

@@ -4,9 +4,9 @@ Rails.application.routes.draw do
   devise_for :users
   resources :users
   resources :books do
-  resources :taggings, only: [:new, :edit, :create, :update, :destroy]
+    resources :taggings, only: [:new, :edit, :create, :update, :destroy]
   end
-  
+
   resources :tags, except: :show
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
