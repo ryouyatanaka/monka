@@ -24,3 +24,5 @@ ja:
         role: 役割
         password: パスワード
         pasword_confiramation: パスワード(確認用）
+      order:
+        shipping_address:  配送先
