@@ -19,16 +19,14 @@ require 'rails_helper'
 # that an instance is receiving a specific message.
 
 RSpec.describe MusicsController, type: :controller do
+  let(:admin_user) { User.all.first }
+  before(:each) { sign_in admin_user }
 
   # This should return the minimal set of attributes required to create a valid
   # Music. As you add validations to Music, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
-  }
-
-  let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    { title: '恋', author: '星野源', published_on: Time.zone.now, showing: true, price: 1200, play_time: 300}
   }
 
   # This should return the minimal set of values that should be in the session
@@ -40,7 +38,7 @@ RSpec.describe MusicsController, type: :controller do
     it "assigns all musics as @musics" do
       music = Music.create! valid_attributes
       get :index, params: {}, session: valid_session
-      expect(assigns(:musics)).to eq([music])
+      expect(assigns(:musics).count).to eq(4)
     end
   end
 
@@ -86,31 +84,19 @@ RSpec.describe MusicsController, type: :controller do
         expect(response).to redirect_to(Music.last)
       end
     end
-
-    context "with invalid params" do
-      it "assigns a newly created but unsaved music as @music" do
-        post :create, params: {music: invalid_attributes}, session: valid_session
-        expect(assigns(:music)).to be_a_new(Music)
-      end
-
-      it "re-renders the 'new' template" do
-        post :create, params: {music: invalid_attributes}, session: valid_session
-        expect(response).to render_template("new")
-      end
-    end
   end
 
   describe "PUT #update" do
     context "with valid params" do
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+        { title: '大きなのっぽの古時計'}
       }
 
       it "updates the requested music" do
         music = Music.create! valid_attributes
         put :update, params: {id: music.to_param, music: new_attributes}, session: valid_session
         music.reload
-        skip("Add assertions for updated state")
+        expect(music.title).to eq new_attributes[:title]
       end
 
       it "assigns the requested music as @music" do
@@ -123,20 +109,6 @@ RSpec.describe MusicsController, type: :controller do
         music = Music.create! valid_attributes
         put :update, params: {id: music.to_param, music: valid_attributes}, session: valid_session
         expect(response).to redirect_to(music)
-      end
-    end
-
-    context "with invalid params" do
-      it "assigns the music as @music" do
-        music = Music.create! valid_attributes
-        put :update, params: {id: music.to_param, music: invalid_attributes}, session: valid_session
-        expect(assigns(:music)).to eq(music)
-      end
-
-      it "re-renders the 'edit' template" do
-        music = Music.create! valid_attributes
-        put :update, params: {id: music.to_param, music: invalid_attributes}, session: valid_session
-        expect(response).to render_template("edit")
       end
     end
   end

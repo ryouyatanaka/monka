@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :orders
   resources :musics
   get 'products/index'
   root to: 'products#index'
