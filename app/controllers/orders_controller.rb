@@ -1,4 +1,5 @@
 class OrdersController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_order, only: [:show, :edit, :update, :destroy]
 
   # GET /orders
@@ -15,6 +16,8 @@ class OrdersController < ApplicationController
   # GET /orders/new
   def new
     @order = Order.new
+    @product = Product.find(params[:product_id])
+    render layout: 'front'
   end
 
   # GET /orders/1/edit
@@ -24,16 +27,17 @@ class OrdersController < ApplicationController
   # POST /orders
   # POST /orders.json
   def create
-    @order = Order.new(order_params)
+    @order = Order.new(user_id: order_params[:user_id], shipping_address: order_params[:shipping_address])
+    @order.checkout(order_params[:product_id])
 
     respond_to do |format|
-      if @order.save
-        format.html { redirect_to @order, notice: 'Order was successfully created.' }
-        format.json { render :show, status: :created, location: @order }
-      else
-        format.html { render :new }
-        format.json { render json: @order.errors, status: :unprocessable_entity }
-      end
+      format.html { redirect_to product_index_url, notice: 'Order was successfully created.' }
+      format.json { render :show, status: :created, location: @order }
+    end
+  rescue
+    respond_to do |format|
+      format.html { render :new }
+      format.json { render json: @order.errors, status: :unprocessable_entity }
     end
   end
 
@@ -69,6 +73,6 @@ class OrdersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def order_params
-      params.require(:order).permit(:shipping_address, :user_id)
+      params.require(:order).permit(:user_id, :product_id, :shipping_address)
     end
 end

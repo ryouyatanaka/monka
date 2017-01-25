@@ -21,6 +21,14 @@
             <h3 class="text-muted">Monka</h3><!-- githubのprj名の公表okかどうか確認が必要です。 -->
           </div>
 
+          <% if notice %>
+          <p id="notice"><%= notice %></p>
+            <div class="alert alert-success alert-dismissible" role="alert">
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <p id="notice"><%= notice %></p>
+            </div>
+          <% end %>
+
           <div class="jumbotron">
             <h1>F-B Shop</h1>
             <p class="lead">This site is the test shop of my favorite books.</p>
