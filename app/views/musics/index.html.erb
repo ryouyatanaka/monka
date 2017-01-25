@@ -28,7 +28,7 @@
           <td><%= music.play_time %></td>
           <td><%= music.showing? ? '可能' : '不可' %></td>
           <td><%= link_to '詳細', music %></td>
-          <td><%= link_to '編集', edit_music_path(book) %></td>
+          <td><%= link_to '編集', edit_music_path(music) %></td>
           <td><%= link_to '削除', music, method: :delete, data: { config: '本当に削除してもいいですか？' }  %></td>
         </tr>
       <% end %>
