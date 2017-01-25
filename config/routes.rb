@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :musics
   get 'products/index'
   root to: 'products#index'
   devise_for :users
