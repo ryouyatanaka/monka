@@ -1,2 +1,2 @@
-class Music < ApplicationRecord
+class Music < Product
 end

@@ -1,4 +1,5 @@
 class MusicsController < ApplicationController
+  before_action :authenticate_usesr!
   before_action :set_music, only: [:show, :edit, :update, :destroy]
 
   # GET /musics
@@ -69,6 +70,6 @@ class MusicsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def music_params
-      params.fetch(:music, {})
+      params.require(:music).permit(:title, :author, :published_on, :showing,:price, :play_time)
     end
 end

@@ -3,12 +3,17 @@ ja:
   general: '一般'
   activerecord:
     attributes:
-      book:
+      product:
         title: タイトル
-        author: 著者
-        published_on: 出版日
         showing: 発売
         price: 価格
+      book:
+        author: 著者
+        published_on: 出版日
+      music:
+        author: アーティスト
+        published_on: 発売日
+        play_time: 再生時間
       tag:
         name: タグ名
       tagging:
