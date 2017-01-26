@@ -26,3 +26,9 @@ ja:
         pasword_confiramation: パスワード(確認用）
       order:
         shipping_address:  配送先
+        status: 状況
+      enum:
+        status:
+          order_accepted: 注文受付
+          paid: 入金済み
+          delivered: 配布済み
