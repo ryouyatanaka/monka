@@ -6,6 +6,8 @@ gem 'rails', '5.0.1'
 
 gem 'devise'
 
+gem 'aasm'
+
 gem 'rubocop', require: false
 
 gem 'devise-i18n'
