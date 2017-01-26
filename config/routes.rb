@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   resources :orders_management, only: [:index, :edit] do
     put :confirm_payment
     put :deliver
+    put :cancel
   end
   resources :tags, except: :show
   # The priority is based upon order of creation: first created -> highest priority.

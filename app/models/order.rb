@@ -8,11 +8,15 @@ class Order < ApplicationRecord
     state :delivered
 
     event :confirm_payment do
-      transitions form: :order_accepted, to: :paid
+      transitions from: :order_accepted, to: :paid
     end
 
     event :deliver do
-      transitions form: :paid, to: :delivered
+      transitions from: :paid, to: :delivered
+    end
+
+    event :cancel do
+      transitions from: :delivered, to: :paid
     end
   end
 

@@ -40,4 +40,6 @@
   <%= button_to '入金確認', orders_management_confirm_payment_path(order.id), params: { id: order.id }, method: :put, class: 'btn btn-default' %>
 <% elsif order.paid? %>
   <%= button_to '配送', orders_management_deliver_path(order.id), params: { id: order.id }, method: :put, class: 'btn-default' %>
+<% elsif order.delivered? %>
+  <%= button_to 'キャンセル', orders_management_cancel_path(order.id), params: { id: order.id }, method: :put, class: 'btn-default' %>
 <% end %>

@@ -32,4 +32,4 @@ ja:
         status:
           order_accepted: 注文受付
           paid: 入金済み
-          delivered: 配布済み
+          delivered: 配送済み
