@@ -27,7 +27,8 @@ ja:
       order:
         shipping_address:  配送先
         status: 状況
-      enum:
+    enum:
+      order:
         status:
           order_accepted: 注文受付
           paid: 入金済み

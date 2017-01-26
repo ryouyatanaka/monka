@@ -8,7 +8,10 @@ Rails.application.routes.draw do
   resources :books do
     resources :taggings, only: [:new, :edit, :create, :update, :destroy]
   end
-  resources :orders_management, only: [:index]
+  resources :orders_management, only: [:index, :edit] do
+    put :confirm_payment
+    put :deliver
+  end
   resources :tags, except: :show
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

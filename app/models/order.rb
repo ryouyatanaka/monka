@@ -2,7 +2,7 @@ class Order < ApplicationRecord
   include AASM
   enum status: { order_accepted: 0, paid: 1, delivered: 2 }
 
-  enum column: :status do
+  aasm column: :status do
     state :order_accepted, initial: true
     state :paid
     state :delivered
